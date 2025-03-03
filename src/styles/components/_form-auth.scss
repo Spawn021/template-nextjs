@@ -1,0 +1,8 @@
+.form-auth {
+  .ant-form-item-explain-error {
+    margin: 6px 0 14px;
+  }
+  .ant-input-password input::placeholder {
+    font-size: 14px;
+  }
+}

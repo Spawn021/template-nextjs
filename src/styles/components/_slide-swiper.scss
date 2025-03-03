@@ -1,0 +1,24 @@
+.slider-banner {
+  .swiper-wrapper {
+    height: 300px;
+  }
+}
+.custom-prev,
+.custom-next {
+  color: #333; /* Màu icon */
+  padding: 8px;
+  background-color: rgba(255, 255, 255, 0.8); /* Nền nút */
+  border-radius: 50%; /* Bo tròn */
+  transition: background-color 0.3s;
+}
+
+.custom-prev:hover,
+.custom-next:hover {
+  background-color: rgba(255, 255, 255, 1); /* Hover effect */
+}
+
+/* Ẩn nút mặc định của Swiper nếu cần */
+.swiper-button-prev,
+.swiper-button-next {
+  display: none !important;
+}

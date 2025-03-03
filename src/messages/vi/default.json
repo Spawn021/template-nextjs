@@ -1,0 +1,7 @@
+{
+  "NotFound": {
+    "title": "404 - Trang Không Tìm Thấy",
+    "message": "Xin lỗi, chúng tôi không thể tìm thấy trang bạn đang tìm.",
+    "backToHome": "Quay lại Trang Chủ"
+  }
+}

@@ -1,0 +1,18 @@
+@use '../variables' as vars;
+.profile-dropdown {
+  .ant-dropdown-menu-item {
+    display: flex;
+    gap: 10px;
+    svg {
+      width: 16px;
+      height: 16px;
+      stroke: vars.$color_gray_8;
+      path {
+        stroke: vars.$color_gray_8;
+      }
+    }
+    span {
+      font-weight: 600;
+    }
+  }
+}
