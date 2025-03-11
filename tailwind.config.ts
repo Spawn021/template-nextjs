@@ -14,6 +14,7 @@ export default {
         background: 'var(--background)',
         foreground: 'var(--foreground)',
       },
+      'aspect-retro': '3 / 2',
     },
   },
   plugins: [heroui()],

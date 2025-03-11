@@ -25,7 +25,9 @@ const eslintConfig = [
     rules: {
       '@typescript-eslint/no-unused-vars': 'off',
       '@typescript-eslint/no-explicit-any': 'off',
-      "react-hooks/exhaustive-deps": 'off'
+      "react-hooks/exhaustive-deps": 'off',
+      'prefer-const': 'off',
+      'jsx-a11y/alt-text': 'off',
 
     },
   },

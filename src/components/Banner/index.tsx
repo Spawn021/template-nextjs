@@ -17,23 +17,27 @@ export default function Banner() {
     queryFn: getBanner,
   })
   return (
-    <div className="bg-[#dfe5ff] px-10 py-3 relative">
+    <div className="bg-[#dfe5ff] px-10 pt-3 pb-[10px] relative slider-banner">
       <Swiper
         slidesPerView={4}
-        spaceBetween={30}
+        spaceBetween={20}
         navigation={{
           prevEl: '.custom-prev',
           nextEl: '.custom-next',
         }}
-        pagination={true}
-        autoplay={{ delay: 1000 }}
+        pagination={{ clickable: true }}
+        autoplay={{ delay: 1000, pauseOnMouseEnter: true }}
         loop={true}
         modules={[Pagination, Navigation, Autoplay]}
         className="mySwiper"
       >
         {data?.map((banner, index) => (
           <SwiperSlide key={index}>
-            <img src={banner?.bannerRectangle} alt="image" className="w-full h-full" />
+            <img
+              src={banner?.bannerRectangle}
+              alt="image"
+              className="w-full cursor-pointer"
+            />
           </SwiperSlide>
         ))}
       </Swiper>

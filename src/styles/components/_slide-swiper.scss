@@ -1,24 +1,33 @@
 .slider-banner {
-  .swiper-wrapper {
-    height: 300px;
+  .custom-prev,
+  .custom-next {
+    color: #333;
+    padding: 16px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    transition: background-color 0.3s;
   }
-}
-.custom-prev,
-.custom-next {
-  color: #333; /* Màu icon */
-  padding: 8px;
-  background-color: rgba(255, 255, 255, 0.8); /* Nền nút */
-  border-radius: 50%; /* Bo tròn */
-  transition: background-color 0.3s;
-}
 
-.custom-prev:hover,
-.custom-next:hover {
-  background-color: rgba(255, 255, 255, 1); /* Hover effect */
-}
+  .custom-prev:hover,
+  .custom-next:hover {
+    background-color: rgba(255, 255, 255, 1);
+  }
 
-/* Ẩn nút mặc định của Swiper nếu cần */
-.swiper-button-prev,
-.swiper-button-next {
-  display: none !important;
+  .swiper-button-prev,
+  .swiper-button-next {
+    display: none !important;
+  }
+
+  .swiper-pagination {
+    margin-top: 0px;
+    position: static;
+  }
+  .swiper-pagination-bullet {
+    width: 6px;
+    height: 6px;
+
+    &-active {
+      background-color: gray;
+    }
+  }
 }

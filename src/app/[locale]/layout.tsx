@@ -5,6 +5,7 @@ import { routing } from '@/i18n/routing'
 import { Locale } from '@/i18n/request'
 import ClientProvider from '@/components/Providers/ClientProvider'
 import LanguageSwitcher from '@/components/Language/LanguageSwitcher'
+import BackTop from '@/components/Button/BackTop'
 export default async function LocaleLayout({
   children,
   params,
@@ -30,6 +31,7 @@ export default async function LocaleLayout({
           </div>
           {children}
         </div>
+        <BackTop />
       </ClientProvider>
     </NextIntlClientProvider>
   )

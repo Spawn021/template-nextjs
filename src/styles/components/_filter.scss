@@ -1,0 +1,23 @@
+.filter-button.ant-btn-variant-text:not(:disabled):not(.ant-btn-disabled):hover {
+  background-color: white;
+}
+.filter-button.ant-btn {
+  padding: 0;
+  gap: 14px;
+}
+.filter-button.ant-btn span:nth-child(2) {
+  font-size: 14px;
+  font-weight: 700;
+}
+.sort-custom .ant-space {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00aaf2;
+  font-weight: 600;
+  gap: 16px;
+}
+.sort-custom .ant-space-item span {
+  font-size: 10px;
+  font-weight: 500;
+}

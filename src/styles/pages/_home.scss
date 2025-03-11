@@ -1,0 +1,37 @@
+.site-customs {
+  max-width: 1000px;
+  margin: 0 auto;
+  div {
+    min-height: 276px;
+    justify-content: center !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+    .left {
+      flex-basis: 42% !important;
+      max-width: 42% !important;
+      gap: 0 !important;
+      h2 {
+        color: #18181a !important;
+        font-weight: 600;
+      }
+      p {
+        color: #030712 !important;
+        font-size: 14px !important;
+        line-height: 22px !important;
+        font-weight: 400;
+      }
+    }
+    .right {
+      font-size: 12px;
+      line-height: 16px;
+      font-weight: 400;
+      max-width: 40% !important;
+      flex-basis: 40% !important;
+      color: #030712 !important;
+    }
+  }
+  iframe {
+    aspect-ratio: 16/9;
+    min-height: 225px;
+  }
+}

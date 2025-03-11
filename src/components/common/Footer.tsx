@@ -5,7 +5,7 @@ import Twitter from '@/resources/svg/twitterMobile.svg'
 export default function Footer() {
   return (
     <footer className="w-full text-base bg-[#f3f4f6] pt-9">
-      <div className="py-[14px] mx-auto px-10 flex justify-between items-start">
+      <div className="pt-[14px] pb-[40px] mx-auto px-10 flex justify-between items-start">
         <Image src={Logo} alt="logo" />
         <div className="flex justify-center items-center gap-3">
           <span className="cursor-pointer hover:font-semibold text-sm">About us</span>

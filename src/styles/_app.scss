@@ -1,9 +1,15 @@
+@use 'mixins';
 @use 'normalize';
 @use 'variables';
 @use 'fonts';
-@use 'mixins';
 
 @use 'components/_form-auth';
 @use 'components/_input-antd';
 @use 'components/_profile';
 @use 'components/_slide-swiper';
+@use 'components/_product';
+
+@use 'pages/_home';
+
+@use 'components/_ant-custom';
+@use 'components/_filter';
