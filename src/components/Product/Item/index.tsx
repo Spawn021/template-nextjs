@@ -3,16 +3,33 @@ import TagCategory from '@/components/Product/Item/TagCategory'
 import TagProduct from '@/components/Product/Item/TagProduct'
 import { ProductItem } from '@/types/Home'
 import { Tag, Typography } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useRouter } from '@/i18n/routing'
+import { APP_URL } from '@/constants'
 type props = {
   data?: ProductItem
   fromVoice?: boolean
   toggle?: boolean
 }
 const { Text } = Typography
-export default function Item({ data }: props) {
+export default function Item({ data, fromVoice }: props) {
+  const router = useRouter()
+  const handleView = () => {
+    router.push({
+      pathname: APP_URL.VOICE + `/${data?.id}`,
+    })
+  }
+  useEffect(() => {
+    if (!fromVoice) {
+      sessionStorage.setItem('preFilter', '')
+    }
+  }, [fromVoice])
+
   return (
-    <div className="bg-white mb-5 max-w-[350px] flex flex-col justify-between gap-10">
+    <div
+      onClick={handleView}
+      className="cursor-pointer bg-white mb-5 max-w-[350px] flex flex-col justify-between gap-10"
+    >
       <div className="mb-2">
         <div className="rounded-lg overflow-hidden bg-[#f3f4f6] flex items-center justify-center aspect-square mb-[8px] ">
           <img

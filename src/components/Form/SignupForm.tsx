@@ -61,7 +61,7 @@ export default function SignupForm() {
             <Input
               {...field}
               size="large"
-              className="placeholder:text-sm"
+              className="placeholder:text-sm rounded-[8px] border-[#d9d9d9]"
               placeholder="Enter your email"
             />
           )}

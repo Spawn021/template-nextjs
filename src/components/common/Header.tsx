@@ -16,10 +16,17 @@ import FavouriteListIcon from '@/resources/svg/FavouriteListIcon'
 import Profile from '@/components/Profile'
 import { usePathname } from '@/i18n/routing'
 import { APP_URL } from '@/constants'
+import { useSearchParams } from 'next/navigation'
+import { useEffect } from 'react'
 export default function Header() {
   const pathname = usePathname()
   const { user } = useSelector((state: RootState) => state.auth)
-
+  const searchParams = useSearchParams()
+  useEffect(() => {
+    if (searchParams.toString().includes('sortField')) {
+      sessionStorage.setItem('preFilter', searchParams.toString())
+    }
+  }, [searchParams.toString()])
   return (
     <header
       className={clsx(

@@ -43,7 +43,7 @@ export default function LoginForm({ loginMutation }: LoginFormProps) {
             <Input
               {...field}
               size="large"
-              className="placeholder:text-sm"
+              className="placeholder:text-sm rounded-[8px] border-[#d9d9d9] "
               placeholder="Email"
             />
           )}

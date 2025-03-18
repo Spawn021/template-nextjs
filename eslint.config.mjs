@@ -28,6 +28,7 @@ const eslintConfig = [
       "react-hooks/exhaustive-deps": 'off',
       'prefer-const': 'off',
       'jsx-a11y/alt-text': 'off',
+      'next/next/no-img-element': 'on',
 
     },
   },

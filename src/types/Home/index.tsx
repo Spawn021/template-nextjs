@@ -44,3 +44,13 @@ export interface ProductItem {
   }
   tags: Tag[]
 }
+export interface Category {
+  id: string | number
+  name: string
+  count: number
+}
+export interface Tag {
+  id: string
+  name: string
+  count: number
+}

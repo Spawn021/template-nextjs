@@ -5,6 +5,7 @@ import HomeLine from '@/resources/svg/HomeLine'
 import { useRouter } from '@/i18n/routing'
 import NextIcon from '@/resources/svg/next-icon.svg'
 import Image from 'next/image'
+import { APP_URL, ORDERS } from '@/constants'
 
 type BreadcrumbType = {
   items: {
@@ -16,6 +17,20 @@ type BreadcrumbType = {
 export default function BreadCrumb({ items }: BreadcrumbType) {
   const router = useRouter()
   const { Text } = Typography
+  const preFilter = sessionStorage.getItem('preFilter')
+  const values = ['files', 'categoryIds', 'series', 'fromPrice', 'toPrice']
+  const fromVoice = values.some((value) => {
+    if (preFilter) {
+      return preFilter.includes(value)
+    }
+  })
+  const handleRedirect = () => {
+    const queryParams = { sortField: 'createdAt', sortType: ORDERS.DESC }
+    router.push({
+      pathname: APP_URL.VOICE,
+      query: queryParams,
+    })
+  }
   const breadcrumbItems = items.map((item, index) => {
     if (index === 0) {
       return {
@@ -27,7 +42,11 @@ export default function BreadCrumb({ items }: BreadcrumbType) {
       }
     } else if (index !== items.length - 1) {
       return {
-        title: <a onClick={() => router.back()}>{item.name}</a>,
+        title: (
+          <a onClick={!fromVoice ? () => handleRedirect() : () => router.back()}>
+            {item.name}
+          </a>
+        ),
       }
     } else {
       return {

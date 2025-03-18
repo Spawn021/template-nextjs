@@ -34,7 +34,9 @@
 .breadcrumb-custom ol li {
   display: flex !important;
   align-items: center !important;
-
+  .ant-breadcrumb-link a {
+    color: rgba(0, 0, 0, 0.88) !important;
+  }
   span {
     display: flex !important;
     align-items: center !important;
@@ -88,5 +90,43 @@
   .skeleton-category {
     min-width: none !important;
     width: 100% !important;
+  }
+}
+.checkbox-custom {
+  &::-webkit-scrollbar-track {
+    background-color: #f5f5f5;
+  }
+
+  &::-webkit-scrollbar {
+    width: 4px;
+    background-color: #f5f5f5;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #9ca3af;
+  }
+  & > label {
+    width: 100% !important;
+
+    .ant-checkbox-label {
+      width: 90% !important;
+
+      .ant-col-4 {
+        text-align: right !important;
+      }
+    }
+  }
+}
+.popover-share {
+  button {
+    border: 1px solid #d9d9d9 !important;
+  }
+}
+
+.swiper-content-image {
+  .swiper-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }

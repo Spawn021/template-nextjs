@@ -1,5 +1,6 @@
 import { APP_TYPE, SORT_TYPE, SORT_TYPE_FILTER } from '@/constants'
-import { ProductItem } from '@/types/Home'
+import { Category, ProductItem, Tag } from '@/types/Home'
+import { Col, Row, Tooltip, Typography } from 'antd'
 const getKeyValue = (key: string) => (obj: Record<string, any>) => obj[key]
 export const getTypeProvider = (provider: string) => {
   return getKeyValue(provider)(APP_TYPE)
@@ -52,4 +53,49 @@ export const truncateText = (text: string, maxLength: number) => {
 }
 export const parseSortBy = (sortType = SORT_TYPE.NEW) => {
   return SORT_TYPE_FILTER[sortType]
+}
+export const ParseOptionCategoryAndTag = (item: Category | Tag) => {
+  const { Text } = Typography
+  const name = (
+    <Row className="flex justify-between">
+      <Col span={16}>
+        <Text ellipsis={{ tooltip: item?.name }}>{item?.name}</Text>
+      </Col>
+      <Col span={4}>{item.count}</Col>
+    </Row>
+  )
+
+  return {
+    label: name,
+    value: item.id,
+  }
+}
+export const convertArrayToString = (arr: any[]) => {
+  if (Array.isArray(arr)) {
+    let str = ''
+    const arrCopy = arr.filter((f) => f)
+    const finalArray = [...new Set(arrCopy)]
+    if (finalArray && finalArray.length) {
+      const length = finalArray.length - 1
+      finalArray.map((item: string, index: number) => {
+        if (length === index) {
+          str += item
+        } else {
+          str += item + ','
+        }
+      })
+      return str
+    }
+    return ''
+  }
+}
+export const convertStringToArray = (value: string | number) => {
+  if (value && String(value).includes(',')) {
+    let split: any | number[] | string[] = String(value).split(',')
+    split = split.map((item: string | number) => {
+      return isNaN(Number(item)) ? item : Number(item)
+    })
+    return split
+  }
+  return [Number(value) ? Number(value) : value]
 }

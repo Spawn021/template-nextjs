@@ -16,7 +16,7 @@ export default function Home() {
     queryFn: getSiteCustoms,
   })
   return (
-    <div className="">
+    <div>
       <Banner />
       <div className="w-full py-[14px] px-[40px]">
         <div className="max-w-[1000px] mx-auto site-customs">
@@ -27,7 +27,9 @@ export default function Home() {
             }}
           />
         </div>
-        <Product data={productData} />
+        <div className="mt-5">
+          <Product data={productData} />
+        </div>
         <div className="w-full flex items-center justify-center">
           <button className="bg-white text-[#030712] text-base font-bold border-solid my-8 py-2 px-3 border-[#dcdcdc] border-[1px] rounded-[6px] cursor-pointer">
             View more
