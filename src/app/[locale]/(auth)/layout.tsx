@@ -6,14 +6,20 @@ import ArrowLeft from '@/resources/svg/ArrowLeft'
 import useSNSLogin from '@/hooks/useSNSLogin'
 import Footer from '@/components/common/Footer'
 import { Spin } from 'antd'
+import useContentDetail from '@/hooks/useContentDetail'
 export default function AuthLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
   const currentPath = usePathname()
-  const googleLoginMutation = useSNSLogin()
-  const twitterLoginMutation = useSNSLogin()
+  const { addToCartAfterLogin } = useContentDetail()
+  const googleLoginMutation = useSNSLogin(() => {
+    addToCartAfterLogin()
+  })
+  const twitterLoginMutation = useSNSLogin(() => {
+    addToCartAfterLogin()
+  })
   return (
     <>
       {googleLoginMutation.isLoading || twitterLoginMutation.isLoading ? (

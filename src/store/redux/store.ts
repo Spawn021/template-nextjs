@@ -6,7 +6,7 @@ import rootReducer from './rootReducer'
 const persistConfig = {
   key: 'root',
   storage: storage,
-  whitelist: ['auth'],
+  whitelist: ['auth', 'content'],
   timeout: 1000,
 }
 

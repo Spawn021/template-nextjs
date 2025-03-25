@@ -111,7 +111,7 @@ function FilterBox({
           closeItem={onClose}
           closeAll={clearAll}
         />
-        <Divider />
+        {selectedOptions.length > 0 && <Divider />}
         <FilterCustom
           title="Category"
           options={categoriesData}

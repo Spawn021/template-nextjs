@@ -1,0 +1,26 @@
+.item-cart {
+  .ant-tag span {
+    font-size: 12px;
+  }
+  .tag .ant-typography {
+    font-size: 14px;
+  }
+  .tag + .ant-typography {
+    font-size: 14px;
+  }
+}
+.ant-drawer-body {
+  padding-bottom: 0px !important;
+  &::-webkit-scrollbar-track {
+    background-color: #f5f5f5;
+  }
+
+  &::-webkit-scrollbar {
+    width: 4px;
+    background-color: #f5f5f5;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #9ca3af;
+  }
+}

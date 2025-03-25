@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { ConfigProvider } from 'antd'
+import MessageProvider from '@/components/Message'
 import './globals.css'
 import '../styles/_app.scss'
 
@@ -28,15 +29,17 @@ export default function RootLayout({
   return (
     <html lang={locale} className={notoSans.className}>
       <body>
-        <ConfigProvider
-          theme={{
-            token: {
-              fontFamily: 'Noto Sans, sans-serif',
-            },
-          }}
-        >
-          <HeroUIProvider>{children}</HeroUIProvider>
-        </ConfigProvider>
+        <MessageProvider>
+          <ConfigProvider
+            theme={{
+              token: {
+                fontFamily: 'Noto Sans, sans-serif',
+              },
+            }}
+          >
+            <HeroUIProvider>{children}</HeroUIProvider>
+          </ConfigProvider>
+        </MessageProvider>
       </body>
     </html>
   )

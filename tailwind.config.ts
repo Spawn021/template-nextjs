@@ -17,7 +17,12 @@ export default {
         background: 'var(--background)',
         foreground: 'var(--foreground)',
       },
-      'aspect-retro': '3 / 2',
+      maxWidth: {
+        'content-detail': 'calc(100% - 160px)',
+      },
+      backgroundImage: {
+        show: 'linear-gradient(180deg, hsla(0, 0%, 100%, 0), hsla(0, 0%, 100%, .7) 40%, #fff)',
+      },
     },
   },
   plugins: [heroui(), flowbite.plugin()],

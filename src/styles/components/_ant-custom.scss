@@ -130,3 +130,21 @@
     align-items: center;
   }
 }
+.ant-drawer-content-wrapper:has(.drawer-cart) {
+  top: 24px !important;
+  right: 24px !important;
+  bottom: 24px !important;
+}
+.drawer-cart {
+  border-radius: 12px;
+  .ant-drawer-header {
+    padding: 20px !important;
+  }
+}
+.empty-wrapper {
+  .ant-empty-description {
+    font-size: 16px !important;
+    color: #030712 !important;
+    font-weight: 500 !important;
+  }
+}

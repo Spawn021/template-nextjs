@@ -8,7 +8,7 @@ import { getTypeProvider } from '@/lib/utils'
 import { useSession, signIn } from 'next-auth/react'
 import { AuthSNS } from '@/lib/constant'
 import { toast } from 'react-toastify'
-export default function useSNSLogin() {
+export default function useSNSLogin(onLoginSuccess?: () => void) {
   const { data: session, update } = useSession()
   const dispatch = useDispatch()
   const router = useRouter()
@@ -39,9 +39,11 @@ export default function useSNSLogin() {
       setIsLoading(true)
       return loginWithApp(params)
     },
-    onSuccess: (response) => {
+    onSuccess: async (response) => {
       if (response.meta.code === 0) {
         dispatch(loginSuccess({ user: response.data }))
+        await new Promise((resolve) => setTimeout(resolve, 200))
+        onLoginSuccess?.()
         router.push('/')
         setIsLoading(false)
       } else {

@@ -20,3 +20,4 @@ export const FILE_FORMAT = [
   { label: 'WAV', value: 'audio/wav' },
   { label: 'MP3', value: 'audio/mpeg' },
 ]
+export const FIELD_VALID = ['files', 'categoryIds', 'tagIds', 'series']

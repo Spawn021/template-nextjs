@@ -99,3 +99,21 @@ export const convertStringToArray = (value: string | number) => {
   }
   return [Number(value) ? Number(value) : value]
 }
+export const convertSizeToUnit = (size: number) => {
+  const GB = 1024 * 1024 * 1024
+  const MB = 1024 * 1024
+  if (size) {
+    if (Number(Number(size / MB).toFixed(2)) < 1024) {
+      return Number(size / MB).toFixed(2) + 'MB'
+    } else {
+      return Number(size / GB).toFixed(2) + 'GB'
+    }
+  }
+  return 0 + ' MB'
+}
+export const getTimeRunning = (duration: number) => {
+  if (duration) {
+    return new Date(duration * 1000).toISOString().slice(11, 19)
+  }
+  return '00:00:00'
+}

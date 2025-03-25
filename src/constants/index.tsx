@@ -67,3 +67,8 @@ export const SORT_TYPE_FILTER = {
     sortType: 'DESC',
   },
 }
+export const FORMAT_DATE_PICKER = 'YYYY/MM/DD'
+export const STATUS_CONTENT = {
+  OFF_SALE: 'off-sale',
+  ON_SALE: 'on-sale',
+}

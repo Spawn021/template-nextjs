@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useParams } from 'next/navigation'
 import useContentDetail from '@/hooks/useContentDetail'
@@ -15,18 +15,16 @@ import { FacebookShareButton, LineShareButton, TwitterShareButton } from 'react-
 import { usePathname } from '@/i18n/routing'
 import CopyClipboard from '@/components/CopyClipboard'
 import ContentImage from '@/components/VoiceDetail/ContentImage'
+import ContentInfo from '@/components/VoiceDetail/ContentInfo'
+import TrackList from '@/components/VoiceDetail/TrackList'
+import ShowMore from '@/components/VoiceDetail/ShowMore'
+
 function VoiceDetail() {
   const { id } = useParams()
   const pathname = usePathname()
-  const { getContentDetail, contentDetail } = useContentDetail()
+  const { contentDetail } = useContentDetail(id)
   const { user } = useSelector((state: RootState) => state.auth)
-  useEffect(() => {
-    if (user) {
-      getContentDetail(id, user.id)
-    } else {
-      getContentDetail(id, '')
-    }
-  }, [id, user])
+
   const urlShare = `${process.env.NEXT_PUBLIC_APP_URL_SHARE}${pathname}`
   const content = (
     <div className="min-w-[200px]">
@@ -74,7 +72,9 @@ function VoiceDetail() {
       />
       <div className="px-8 py-[30px]">
         <div className="flex justify-between mb-3">
-          <div className="text-2xl font-bold ">{contentDetail?.title}</div>
+          <div className="text-2xl font-semibold leading-[34px] ">
+            {contentDetail?.title}
+          </div>
           <div className="text-gray-500 text-sm">
             <Popover
               content={content}
@@ -92,8 +92,12 @@ function VoiceDetail() {
         <div className="flex gap-10">
           <div className="w-1/2">
             <ContentImage images={contentDetail?.images} />
+            <ShowMore contentDetail={contentDetail} />
           </div>
-          <div className="w-1/2">b</div>
+          <div className="w-1/2">
+            <ContentInfo contentDetail={contentDetail} />
+            <TrackList contentDetail={contentDetail} />
+          </div>
         </div>
       </div>
     </div>

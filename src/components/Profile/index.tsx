@@ -8,6 +8,7 @@ import { Dropdown, Space } from 'antd'
 import LogoutIcon from '@/resources/svg/LogoutIcon'
 import { signOut } from 'next-auth/react'
 import { logout } from '@/store/redux/slices/authSlice'
+import { setAddToCart } from '@/store/redux/slices/contentSlice'
 interface ProfileProps {
   email: string
 }
@@ -18,6 +19,7 @@ const Profile: React.FC<ProfileProps> = ({ email }) => {
   const handleLogout = async () => {
     await signOut({ redirect: false })
     dispatch(logout())
+    dispatch(setAddToCart([]))
     router.push('/')
   }
   const onClick: MenuProps['onClick'] = ({ key }) => {

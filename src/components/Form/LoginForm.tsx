@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Form, Input, Button } from 'antd'
 import { z } from 'zod'
 import { loginSchema } from '@/schemas/auth'
+import useContentDetail from '@/hooks/useContentDetail'
 
 type LoginForm = z.infer<typeof loginSchema>
 

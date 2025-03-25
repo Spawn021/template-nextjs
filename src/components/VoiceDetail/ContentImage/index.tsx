@@ -5,17 +5,15 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 import { Pagination, Navigation, Autoplay } from 'swiper/modules'
-import { current } from '@reduxjs/toolkit'
 function ContentImage({ images }: any) {
   const [imageCurrent, setImageCurrent] = useState() as any
 
   useEffect(() => {
     if (images) setImageCurrent(images[0])
   }, [images])
-  console.log(imageCurrent)
   return (
-    <div className="bg-[#f3f4f6] rounded-[10px] w-full">
-      <div className="max-w-[400px] pt-4 mb-4 mx-auto">
+    <div className="bg-[#f3f4f6] rounded-[10px] w-full mb-4">
+      <div className="max-w-[400px] pt-4 mb-2 mx-auto">
         <img
           src={imageCurrent?.url}
           alt="preview"

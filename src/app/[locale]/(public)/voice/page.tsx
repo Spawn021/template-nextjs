@@ -33,7 +33,6 @@ export default function Voice() {
     return Object.fromEntries(searchParams.entries())
   }, [searchParams])
 
-  const [sort, setSort] = useState('1')
   const [showFilter, setShowFilter] = useState(false)
 
   const { data, isLoading } = useVoice(user.id, { ...params, limit: 15 })
@@ -57,15 +56,12 @@ export default function Voice() {
     })
   }
   const handleSortChange = (sortValue: string) => {
-    setSort(sortValue)
-  }
-  const sortQuery = parseSortBy(sort)
-  useEffect(() => {
+    const sortQuery = parseSortBy(sortValue)
     router.push({
       pathname: baseURL,
       query: { ...params, page: 1, ...sortQuery },
     })
-  }, [sortQuery.sortField, sortQuery.sortType])
+  }
 
   const handleFilter = () => {
     setShowFilter(!showFilter)
