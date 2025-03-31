@@ -5,7 +5,7 @@ import { useRouter } from '@/i18n/routing'
 import Trash from '@/resources/svg/Trash'
 import { Checkbox } from 'antd'
 import { Typography } from 'antd'
-import React from 'react'
+import clsx from 'clsx'
 const { Text, Paragraph } = Typography
 function Item({
   item,
@@ -28,7 +28,13 @@ function Item({
   }
   return (
     <div className="flex items-center gap-3 item-cart justify-between">
-      <div className="flex items-center gap-3 w-[75%]">
+      <div
+        className={clsx(
+          'flex items-center gap-3 w-[75%]',
+          item?.content?.status === STATUS_CONTENT.OFF_SALE &&
+            'opacity-50 cursor-not-allowed',
+        )}
+      >
         <Checkbox
           checked={isChecked}
           disabled={item?.content?.status === STATUS_CONTENT.OFF_SALE}
@@ -38,12 +44,24 @@ function Item({
         <div onClick={handleClickItem} className="w-1/5">
           <img
             src={item?.content?.images[0]?.url}
-            className="w-16 h-16 object-cover rounded-[4px] cursor-pointer bg-[#f3f4f6]"
+            className={clsx(
+              'w-16 h-16 object-cover rounded-[4px] bg-[#f3f4f6]',
+              item?.content?.status === STATUS_CONTENT.OFF_SALE
+                ? 'cursor-not-allowed'
+                : 'cursor-pointer',
+            )}
             alt="thumbnail"
           />
         </div>
         <div onClick={handleClickItem} className="w-[70%] flex flex-col">
-          <div className="tag cursor-pointer">
+          <div
+            className={clsx(
+              'tag',
+              item?.content?.status === STATUS_CONTENT.OFF_SALE
+                ? 'cursor-not-allowed'
+                : 'cursor-pointer',
+            )}
+          >
             <TagCategory
               backgroundColor={item?.content.category?.color.colorCode}
               borderColor={item?.content.category?.color.colorCodeBorder}
@@ -53,7 +71,12 @@ function Item({
             />
           </div>
           <Paragraph
-            className="cursor-pointer text-base overflow-ellipsis overflow-hidden w-[100%] "
+            className={clsx(
+              'text-base overflow-ellipsis overflow-hidden w-[100%]',
+              item?.content?.status === STATUS_CONTENT.OFF_SALE
+                ? 'cursor-not-allowed'
+                : 'cursor-pointer',
+            )}
             ellipsis={{ tooltip: item?.content.title, rows: 2 }}
           >
             {item?.content.title}

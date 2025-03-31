@@ -15,3 +15,29 @@
 @use 'components/_filter';
 @use 'components/_cart';
 @use 'components/_modal';
+@use 'components/_payment';
+@use 'components/_detail';
+
+body {
+  &::-webkit-scrollbar-track {
+    background-color: #f5f5f5;
+  }
+
+  &::-webkit-scrollbar {
+    width: 4px;
+    background-color: #f5f5f5;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #9ca3af;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: #9ca3af;
+  }
+  &::-webkit-scrollbar-track:hover {
+    background-color: #f1f1f1;
+  }
+  &::-webkit-scrollbar-track:active {
+    background-color: #ccc;
+  }
+}

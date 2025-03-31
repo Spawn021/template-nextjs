@@ -35,7 +35,7 @@ function useContentDetail(contentId?: any) {
     },
   })
 
-  const addToCart = async (contentDetail: any) => {
+  const addToCart = async (contentDetail: any, isShowMessage: boolean) => {
     const { title, actor, images, unitPrice, id, series, category } = contentDetail
     const data = {
       content: {
@@ -60,7 +60,7 @@ function useContentDetail(contentId?: any) {
       addToCartMutation.mutate(contentDetail)
     }
     dispatch(setAddToCart(newListCart))
-    showMessage('success', 'Add to cart successfully')
+    isShowMessage && showMessage('success', 'Add to cart successfully')
   }
   const addToCartAfterLogin = async () => {
     const listContentIds = cart.map((item: any) => item.content.id)

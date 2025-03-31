@@ -1,0 +1,63 @@
+.payment-method {
+  .ant-radio-inner {
+    width: 20px;
+    height: 20px;
+  }
+}
+.list-purchase {
+  max-height: calc(100vh - 270px);
+  overflow: auto;
+  &::-webkit-scrollbar-track {
+    background-color: #f5f5f5;
+  }
+
+  &::-webkit-scrollbar {
+    width: 4px;
+    background-color: #f5f5f5;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #9ca3af;
+  }
+}
+.method-konbini {
+  .ant-form-item-control-input-content input {
+    border-radius: 8px;
+  }
+  .txt-danger {
+    color: red;
+  }
+}
+.modal-loading {
+  .ant-modal-content {
+    border-radius: 12px;
+    padding: 34px;
+  }
+  .title {
+    color: #1a1a1a;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 28px;
+  }
+  .icon-loading {
+    display: block;
+    margin: auto;
+    padding: 32px 0;
+    animation: loading 1s infinite linear;
+  }
+  .subtitle {
+    color: #313131;
+    text-align: center;
+    font-size: 16px;
+    line-height: 26px;
+  }
+}
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

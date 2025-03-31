@@ -7,6 +7,7 @@ export interface Content {
     series: string[]
     withoutContentIds: string[]
   }
+  listItemUnavailable: string[]
 }
 const initialState: Content = {
   cart: [],
@@ -15,6 +16,7 @@ const initialState: Content = {
     series: [],
     withoutContentIds: [],
   },
+  listItemUnavailable: [],
 }
 const contentSlice = createSlice({
   name: 'content',
@@ -35,7 +37,15 @@ const contentSlice = createSlice({
         },
       }
     },
+    setListItemUnavailable: (state: Content, action) => {
+      state.listItemUnavailable = action.payload
+    },
   },
 })
-export const { setAddToCart, setListCheckout, setContentRelevant } = contentSlice.actions
+export const {
+  setAddToCart,
+  setListCheckout,
+  setContentRelevant,
+  setListItemUnavailable,
+} = contentSlice.actions
 export default contentSlice.reducer

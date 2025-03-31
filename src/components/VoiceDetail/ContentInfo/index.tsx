@@ -11,8 +11,11 @@ import TagProduct from '@/components/Product/Item/TagProduct'
 import { APP_URL, FORMAT_DATE_PICKER, ORDERS } from '@/constants'
 import { convertSizeToUnit } from '@/lib/utils'
 import { FIELD_VALID } from '@/lib/constant'
-import { setContentRelevant } from '@/store/redux/slices/contentSlice'
+import { setContentRelevant, setListCheckout } from '@/store/redux/slices/contentSlice'
 import useContentDetail from '@/hooks/useContentDetail'
+import WaitIcon from '@/resources/svg/icon-wait.svg'
+import Image from 'next/image'
+
 const { Paragraph } = Typography
 function ContentInfo({ contentDetail }: { contentDetail: any }) {
   const router = useRouter()
@@ -35,16 +38,16 @@ function ContentInfo({ contentDetail }: { contentDetail: any }) {
     isAddToCart: isAddToCartUser,
     isMyLibrary,
     isWaitPayment,
+    isPending,
     contentTags,
   } = contentDetail ?? {}
-
   const { addToCart } = useContentDetail()
   const { series: seriesLocal, withoutContentIds: idsLocal } = useSelector(
     (state: RootState) => state.content.contentRelevant,
   )
-  const { cart } = useSelector((state: RootState) => state.content)
+  const { user } = useSelector((state: RootState) => state.auth)
+  const { cart, listCheckout } = useSelector((state: RootState) => state.content)
   const { accessToken } = useSelector((state: RootState) => state.auth.user)
-
   const isAddedToCart = accessToken
     ? isAddToCartUser
     : cart.some((e: any) => e?.content?.id === id)
@@ -89,7 +92,7 @@ function ContentInfo({ contentDetail }: { contentDetail: any }) {
       value: releasedAt ? moment(releasedAt).format(FORMAT_DATE_PICKER) : '--',
     },
   ]
-  const handleAddToCart = () => {
+  const handleAddToCart = (isShowMessage: boolean) => {
     if (id) {
       const seriesNew = [...seriesLocal]
       const idNew = [...idsLocal]
@@ -101,10 +104,21 @@ function ContentInfo({ contentDetail }: { contentDetail: any }) {
       }
       dispatch(setContentRelevant({ series: seriesNew, withoutContentIds: idNew }))
     }
-    addToCart(contentDetail)
+    dispatch(setListCheckout([...listCheckout, id]))
+    addToCart(contentDetail, isShowMessage)
   }
   const handleBuyNow = () => {
-    // Buy now logic
+    if (!isAddedToCart) handleAddToCart(false)
+
+    dispatch(setListCheckout([id]))
+    if (user.accessToken) {
+      router.push(APP_URL.CHECKOUT)
+    } else {
+      router.push({
+        pathname: APP_URL.LOGIN,
+        query: { redirect: APP_URL.CHECKOUT },
+      })
+    }
   }
   const handleRedirect = (field: string, value: string) => {
     if (FIELD_VALID.indexOf(field) !== -1) {
@@ -124,23 +138,51 @@ function ContentInfo({ contentDetail }: { contentDetail: any }) {
     switch (true) {
       case isMyLibrary:
         return <></>
+      case isPending:
+        return (
+          <div className="border-[1px] border-solid border-[#e1e3e7] p-4 mb-5 rounded-[12px]">
+            <div>Price</div>
+            <div className="flex items-center">
+              <div className="text-[28px] font-bold text-[#d92d20] mb-4">{`${unitPrice} 円  `}</div>
+              <span className="ml-2 text-base leading-[26px]">(Tax including)</span>
+            </div>
+            <Button
+              className="w-full h-[52px] border-[1px] border-solid border-[#dcdcdc] rounded-[8px] py-3 px-4 font-semibold text-xl text-[#1a1a1a] "
+              disabled
+            >
+              <Image
+                src={WaitIcon}
+                alt="icon wait payment"
+                className="btn-wait-payment"
+              />
+              Wait payment
+            </Button>
+          </div>
+        )
       default:
         return (
           <>
             {isAddedToCart ? (
-              <div className="flex gap-3">
-                <Button
-                  className="w-[49%] h-[52px] border-[1px] border-solid border-[#dcdcdc] rounded-[8px] py-3 px-4 font-semibold text-xl text-[#1a1a1a] "
-                  disabled
-                >
-                  Added To Cart
-                </Button>
-                <button
-                  className="w-[49%] h-[52px] rounded-[8px] py-3 px-4 font-semibold text-xl border-[1px] border-solid border-[#dcdcdc] text-[#fff] bg-[#00aaf2]"
-                  onClick={() => handleBuyNow()}
-                >
-                  Buy Now
-                </button>
+              <div className="border-[1px] border-solid border-[#e1e3e7] p-4 mb-5 rounded-[12px]">
+                <div>Price</div>
+                <div className="flex items-center">
+                  <div className="text-[28px] font-bold text-[#d92d20] mb-4">{`${unitPrice} 円  `}</div>
+                  <span className="ml-2 text-base leading-[26px]">(Tax including)</span>
+                </div>
+                <div className="flex gap-3">
+                  <Button
+                    className="w-[49%] h-[52px] border-[1px] border-solid border-[#dcdcdc] rounded-[8px] py-3 px-4 font-semibold text-xl text-[#1a1a1a] "
+                    disabled
+                  >
+                    Added To Cart
+                  </Button>
+                  <button
+                    className="w-[49%] h-[52px] rounded-[8px] py-3 px-4 font-semibold text-xl border-[1px] border-solid border-[#dcdcdc] text-[#fff] bg-[#00aaf2]"
+                    onClick={() => handleBuyNow()}
+                  >
+                    Buy Now
+                  </button>
+                </div>
               </div>
             ) : (
               <div className="border-[1px] border-solid border-[#e1e3e7] p-4 mb-5 rounded-[12px]">
@@ -152,7 +194,7 @@ function ContentInfo({ contentDetail }: { contentDetail: any }) {
                 <div className="flex gap-3">
                   <button
                     className="w-[49%] h-[52px] border-[1px] border-solid border-[#dcdcdc] rounded-[8px] py-3 px-4 font-semibold text-xl text-[#1a1a1a] "
-                    onClick={() => handleAddToCart()}
+                    onClick={() => handleAddToCart(true)}
                   >
                     Add To Cart
                   </button>

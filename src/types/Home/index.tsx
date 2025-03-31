@@ -54,3 +54,9 @@ export interface Tag {
   name: string
   count: number
 }
+
+export interface InfoPayment {
+  contents: { id: string; unitPrice: number }[]
+  currency: string
+  paymentMethod?: string
+}

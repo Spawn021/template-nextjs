@@ -1,5 +1,6 @@
 import { APP_TYPE, SORT_TYPE, SORT_TYPE_FILTER } from '@/constants'
 import { Category, ProductItem, Tag } from '@/types/Home'
+import BigNumber from 'bignumber.js'
 import { Col, Row, Tooltip, Typography } from 'antd'
 const getKeyValue = (key: string) => (obj: Record<string, any>) => obj[key]
 export const getTypeProvider = (provider: string) => {
@@ -116,4 +117,17 @@ export const getTimeRunning = (duration: number) => {
     return new Date(duration * 1000).toISOString().slice(11, 19)
   }
   return '00:00:00'
+}
+export const compareTwoNumber = (valueOne: number, valueTwo: number) => {
+  const result = new BigNumber(valueOne).gt(valueTwo)
+  return result
+}
+export const CURRENCY_PAYMENT = 'jpy'
+export const TYPE_MODAL_ERROR_CHECKOUT = {
+  CHANGE_PRICE: 'CHANGE_PRICE',
+  ITEM_UNAVAIBLE: 'ITEM_UNAVAIBLE',
+}
+export const TYPE_VIEW = {
+  VIEW_DETAIL: 'VIEW_DETAIL',
+  VIEW_MY_LIBRARY: 'VIEW_MY_LIBRARY',
 }

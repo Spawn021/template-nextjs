@@ -21,7 +21,6 @@ import ArrowLeft from '@/resources/svg/ArrowLeft'
 import { FilterPriceForm } from '@/components/FilterBox/FilterPrice'
 import EmptyVoice from '@/components/Empty/EmptyVoice'
 import { APP_URL } from '@/constants'
-import { set } from 'react-hook-form'
 
 export default function Voice() {
   const router = useRouter()

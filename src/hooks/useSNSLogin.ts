@@ -8,11 +8,13 @@ import { getTypeProvider } from '@/lib/utils'
 import { useSession, signIn } from 'next-auth/react'
 import { AuthSNS } from '@/lib/constant'
 import { toast } from 'react-toastify'
+import { useSearchParams } from 'next/navigation'
 export default function useSNSLogin(onLoginSuccess?: () => void) {
   const { data: session, update } = useSession()
   const dispatch = useDispatch()
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
+  const searchParams = useSearchParams()
 
   const setProvider = (provider: string | null) => {
     if (provider) {
@@ -44,7 +46,9 @@ export default function useSNSLogin(onLoginSuccess?: () => void) {
         dispatch(loginSuccess({ user: response.data }))
         await new Promise((resolve) => setTimeout(resolve, 200))
         onLoginSuccess?.()
-        router.push('/')
+        const redirect = searchParams.get('redirect') || '/'
+        router.push(redirect)
+        router.push(redirect)
         setIsLoading(false)
       } else {
         toast.error('Something went wrong. Please try again.')

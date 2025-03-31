@@ -21,7 +21,7 @@ export default function TagCategory({
       className={clsx(
         'font-semibold rounded-[6px] text-center ',
         cssText
-          ? 'text-xs py-[2px] px-2 mb-1 w-auto inline-block max-w-[100%]'
+          ? 'text-[12px] py-[2px] px-2 mb-1 w-auto inline-block max-w-[100%]'
           : 'text-base py-[2px] px-3 mb-[6px] w-full',
       )}
       style={{

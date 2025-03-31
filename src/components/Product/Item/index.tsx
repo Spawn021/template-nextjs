@@ -6,6 +6,7 @@ import { Tag, Typography } from 'antd'
 import React, { useEffect } from 'react'
 import { useRouter } from '@/i18n/routing'
 import { APP_URL } from '@/constants'
+import { TYPE_VIEW } from '@/lib/utils'
 type props = {
   data?: ProductItem
   fromVoice?: boolean
@@ -14,20 +15,33 @@ type props = {
 const { Text } = Typography
 export default function Item({ data, fromVoice }: props) {
   const router = useRouter()
-  const handleView = () => {
-    router.push({
-      pathname: APP_URL.VOICE + `/${data?.id}`,
-    })
+  const handleView = (type: string) => {
+    if (type === TYPE_VIEW.VIEW_MY_LIBRARY) {
+      router.push({
+        pathname: APP_URL.MY_LIBRARY,
+        query: { page: 'detail', id: data?.id },
+      })
+    }
+
+    if (type === TYPE_VIEW.VIEW_DETAIL) {
+      router.push({
+        pathname: APP_URL.VOICE + `/${data?.id}`,
+      })
+    }
   }
   useEffect(() => {
     if (!fromVoice) {
       sessionStorage.setItem('preFilter', '')
     }
   }, [fromVoice])
-
+  const viewType = data?.isPending
+    ? TYPE_VIEW.VIEW_DETAIL
+    : data?.isBought
+      ? TYPE_VIEW.VIEW_MY_LIBRARY
+      : TYPE_VIEW.VIEW_DETAIL
   return (
     <div
-      onClick={handleView}
+      onClick={() => handleView(viewType)}
       className="cursor-pointer bg-white mb-5 max-w-[350px] flex flex-col justify-between gap-10"
     >
       <div className="mb-2">
@@ -71,7 +85,7 @@ export default function Item({ data, fromVoice }: props) {
               Added to cart
             </Tag>
           )}
-          {data?.isBought && (
+          {data?.isBought && !data?.isPending && (
             <Tag className="text-[#4b5563] text-sm bg-[#e5e7eb] font-semibold">
               Bought
             </Tag>

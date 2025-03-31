@@ -72,3 +72,18 @@ export const STATUS_CONTENT = {
   OFF_SALE: 'off-sale',
   ON_SALE: 'on-sale',
 }
+export const PAYMENT_METHOD = {
+  CREDIT_CART: 'credit-card',
+  KONBINI: 'konbini',
+}
+export const MIN_PRICE_KONBINI = 120
+export const MIN_PRICE_CREDIT_CARD = 50
+export const MAX_PRICE_KONBINI = 300000
+export const MAX_PRICE_CREDIT_CARD = 99999999
+export const PROFILE_SECTION = {
+  MY_PROFILE: 'my_profile',
+  TRANSACTION_HISTORY: 'transaction_history',
+  MY_LIBRARY: 'my_library',
+  QR_CODE: 'qr_code',
+  SIGN_OUT: 'sign_out',
+}

@@ -64,10 +64,12 @@ export default function Header() {
             </div>
           </Link>
           {user?.accessToken && (
-            <div className="flex items-center justify-center font-semibold h-8 gap-3 rounded-2xl border-[1px] border-solid border-[#e1e3e7] bg-white px-3 cursor-pointer">
-              <FavouriteListIcon />
-              <span className="inline-block whitespace-nowrap">My library </span>
-            </div>
+            <Link href={APP_URL.MY_LIBRARY}>
+              <div className="flex items-center justify-center font-semibold h-8 gap-3 rounded-2xl border-[1px] border-solid border-[#e1e3e7] bg-white px-3 cursor-pointer">
+                <FavouriteListIcon />
+                <span className="inline-block whitespace-nowrap">My library </span>
+              </div>
+            </Link>
           )}
           <div
             onClick={onOpen}
