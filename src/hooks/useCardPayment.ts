@@ -3,11 +3,13 @@ import {
   apiPurchaseTransactionFree,
   getClientKeyForSetup,
   getClientSecret,
+  handleDeleteCard,
   handleUpdateCardPayment,
 } from '@/lib/api/payment'
 import { RootState } from '@/store/redux/store'
 import { InfoPayment } from '@/types/Home'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { on } from 'events'
 import { useSelector } from 'react-redux'
 
 function useCardPayment() {
@@ -23,6 +25,14 @@ function useCardPayment() {
   }
   const updateCardPayment = async (params: { paymentMethodId: string }) => {
     const response = await handleUpdateCardPayment(id, params)
+    if (response?.data.meta?.code === 0) {
+      return response?.data.meta?.code
+    } else {
+      throw Error(response?.data.meta?.errorCode || 'Update card error')
+    }
+  }
+  const deleteCardPayment = async () => {
+    const response = await handleDeleteCard(id)
     if (response?.data.meta?.code === 0) {
       return response?.data.meta?.code
     } else {
@@ -67,12 +77,21 @@ function useCardPayment() {
       queryClient.invalidateQueries({ queryKey: ['userProfile'] })
     },
   })
+  const deleteCardMultation = useMutation({
+    mutationFn: deleteCardPayment,
+    onSuccess(data) {
+      return data
+    },
+    onError(error: string) {},
+  })
+
   return {
     useFetchSecretKeyForSetup,
     onUpdateCard: updateCardMultation?.mutate,
     getClientSecretConfirm,
     purchaseTransactionFree,
     checkTransactionPuchased,
+    onDeleteCard: deleteCardMultation?.mutate,
   }
 }
 

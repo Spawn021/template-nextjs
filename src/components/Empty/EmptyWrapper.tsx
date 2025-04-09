@@ -25,11 +25,7 @@ export default function EmptyWrapper({
 
   return (
     <div className="flex flex-col justify-center items-center min-h-[250px] empty-wrapper">
-      <Empty
-        imageStyle={{ height: 'auto' }}
-        image={<NoDataIcon />}
-        description={<span>{message}</span>}
-      >
+      <Empty image={<NoDataIcon />} description={<span>{message}</span>}>
         {hasButton && (
           <button
             className="px-3 py-1 border bg-[#00aaf2] w-full rounded-[8px] text-base text-white hover:bg-[#fff] hover:text-[#00aaf2] hover:border-[#00aaf2]"

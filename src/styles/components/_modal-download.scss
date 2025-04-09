@@ -1,0 +1,45 @@
+.ant-modal-content:has(.content-download) .ant-modal-close {
+  border: 1px solid #e1e3e7 !important;
+}
+.content-download {
+  .ant-tabs-top > .ant-tabs-nav::before {
+    display: none;
+  }
+  .ant-tabs .ant-tabs-ink-bar {
+    display: none !important;
+  }
+  .ant-tabs {
+    .ant-tabs-tab {
+      padding: 2px 12px !important;
+      border: 1px solid black !important;
+      border-radius: 8px;
+      font-size: 14px !important;
+      font-weight: 600 !important;
+      & + .ant-tabs-tab {
+        margin-left: 8px !important;
+      }
+      &:hover {
+        color: black !important;
+      }
+
+      &-active {
+        background-color: #000 !important;
+        .ant-tabs-tab-btn {
+          color: white !important;
+        }
+      }
+      &.ant-tabs-tab-disabled {
+        color: #000 !important;
+      }
+    }
+  }
+  .btn-download {
+    .ant-btn-variant-outlined:disabled {
+      background-color: white !important;
+      opacity: 0.5 !important;
+    }
+    span {
+      color: #00aaf2 !important;
+    }
+  }
+}

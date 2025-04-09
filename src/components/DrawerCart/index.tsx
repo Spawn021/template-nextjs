@@ -14,6 +14,7 @@ import PackageIcon from '@/resources/svg/PackageIcon'
 import { setAddToCart, setListCheckout } from '@/store/redux/slices/contentSlice'
 import { useRouter } from '@/i18n/routing'
 import { APP_URL, STATUS_CONTENT } from '@/constants'
+import { useQueryClient } from '@tanstack/react-query'
 
 function DrawerCart({
   open,
@@ -25,6 +26,7 @@ function DrawerCart({
   listCart: any
 }) {
   const router = useRouter()
+  const queryClient = useQueryClient()
   const { user } = useSelector((state: RootState) => state.auth)
   const [checkedList, setCheckedList] = useState<string[]>([])
   const { listCheckout } = useSelector((state: RootState) => state.content)
@@ -99,6 +101,7 @@ function DrawerCart({
     if (user?.accessToken) {
       deleteItemCart({ ids: idsArray })
       dispatch(setListCheckout([]))
+      queryClient.invalidateQueries({ queryKey: ['voice'] })
     } else {
       dispatch(setAddToCart([]))
     }
@@ -108,6 +111,7 @@ function DrawerCart({
     const idsArray = [ids]
     if (user?.accessToken) {
       deleteItemCart({ ids: idsArray })
+      queryClient.invalidateQueries({ queryKey: ['voice'] })
     } else {
       dispatch(
         setAddToCart(listCart.filter((item: any) => item?.content?.id !== idGuest)),

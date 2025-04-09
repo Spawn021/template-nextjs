@@ -1,3 +1,4 @@
+'use client'
 import React, { useEffect, useState } from 'react'
 import { PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js'
 import { Button } from 'antd'
@@ -5,10 +6,13 @@ import { Spin } from 'antd'
 import { useShowMessage } from '@/components/Message'
 import useCardPayment from '@/hooks/useCardPayment'
 import { useQueryClient } from '@tanstack/react-query'
+import useModal from '@/hooks/useModal'
+import { on } from 'events'
 
 function CheckoutForm({ setIsEditCard }: { setIsEditCard?: (value: boolean) => void }) {
   const queryClient = useQueryClient()
   const [loading, setLoading] = useState(true)
+  const { onClose } = useModal()
   const elements = useElements()
   const stripe = useStripe()
   const showMessage = useShowMessage()
@@ -27,6 +31,7 @@ function CheckoutForm({ setIsEditCard }: { setIsEditCard?: (value: boolean) => v
     const params = { paymentMethodId }
     onUpdateCard(params, {
       onSuccess: () => {
+        onClose()
         setIsEditCard && setIsEditCard(false)
       },
     })
@@ -72,6 +77,7 @@ function CheckoutForm({ setIsEditCard }: { setIsEditCard?: (value: boolean) => v
               <Button
                 size="large"
                 onClick={() => {
+                  onClose()
                   setIsEditCard && setIsEditCard(false)
                 }}
                 disabled={!stripe}

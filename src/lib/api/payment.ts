@@ -18,3 +18,6 @@ export const apiPurchaseTransactionFree = (params: any) => {
 export const apiGetPurchaseTransaction = (id: string) => {
   return api.get(`purchase-transactions/payment/${id}`)
 }
+export const handleDeleteCard = (id: string) => {
+  return api.delete(`users/${id}/delete-card`)
+}

@@ -51,7 +51,7 @@ export default function BreadCrumb({ items }: BreadcrumbType) {
     } else {
       return {
         title: (
-          <Text className="name" ellipsis={{ tooltip: item.name }}>
+          <Text style={{ maxWidth: '800px' }} ellipsis={{ tooltip: item.name }}>
             {item.name}
           </Text>
         ),

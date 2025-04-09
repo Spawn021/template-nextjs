@@ -31,19 +31,21 @@ export default function useSNSLogin(onLoginSuccess?: () => void) {
         setProvider(provider)
         await signIn(provider, { redirect: false })
         await update()
-        return
       }
       const params: AuthSNS = {
-        accessToken: session?.accessToken,
+        accessToken: session?.accessToken || '',
         tokenSecret: session?.tokenSecret || '',
         type: getTypeProvider(provider),
       }
       setIsLoading(true)
+
       return loginWithApp(params)
     },
     onSuccess: async (response) => {
       if (response.meta.code === 0) {
-        dispatch(loginSuccess({ user: response.data }))
+        const { provider } = session as any
+
+        dispatch(loginSuccess({ user: { ...response.data, provider } }))
         await new Promise((resolve) => setTimeout(resolve, 200))
         onLoginSuccess?.()
         const redirect = searchParams.get('redirect') || '/'

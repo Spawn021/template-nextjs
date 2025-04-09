@@ -1,6 +1,5 @@
 import { filterVoice } from '@/lib/constant'
 import api from '@/lib/axios'
-import { user } from '@heroui/theme'
 export const getProducts = async (id: string, params: filterVoice) => {
   const response = await api.get(`contents`, {
     params: {
@@ -8,6 +7,7 @@ export const getProducts = async (id: string, params: filterVoice) => {
       ...(id ? { userId: id } : {}),
     },
   })
+  console.log('response', response.data)
   return response.data.data
 }
 export const getCategories = async () => {
@@ -32,4 +32,14 @@ export const getListCartUser = () => {
 }
 export const deleteCartUser = (params: any) => {
   return api.delete(`carts`, { data: params })
+}
+export const getLiBraryDetail = (id: any) => {
+  return api.get(`contents/${id}/library`)
+}
+export const onDownload = (id: string, params: any) => {
+  return api.get(`contents/${id}/download`, { params })
+}
+
+export const onDownloadMulti = (id: string, data: any) => {
+  return api.post(`contents/${id}/downloads`, data)
 }

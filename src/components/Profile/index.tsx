@@ -9,6 +9,7 @@ import LogoutIcon from '@/resources/svg/LogoutIcon'
 import { signOut } from 'next-auth/react'
 import { logout } from '@/store/redux/slices/authSlice'
 import { setAddToCart } from '@/store/redux/slices/contentSlice'
+import { APP_URL, PROFILE_SECTION } from '@/constants'
 interface ProfileProps {
   email: string
 }
@@ -25,10 +26,16 @@ const Profile: React.FC<ProfileProps> = ({ email }) => {
   const onClick: MenuProps['onClick'] = ({ key }) => {
     switch (key) {
       case '1':
-        console.log('My Profile')
+        router.push({
+          pathname: APP_URL.PROFILE,
+          query: { tab: PROFILE_SECTION.MY_PROFILE },
+        })
         break
       case '2':
-        console.log('Transaction History')
+        router.push({
+          pathname: APP_URL.PROFILE,
+          query: { tab: PROFILE_SECTION.TRANSACTION_HISTORY },
+        })
         break
       case '3':
         handleLogout()

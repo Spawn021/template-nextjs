@@ -64,6 +64,9 @@ function useContentDetail(contentId?: any) {
   }
   const addToCartAfterLogin = async () => {
     const listContentIds = cart.map((item: any) => item.content.id)
+    if (listContentIds.length === 0) {
+      return
+    }
     const response = await apiAddToCart({ contentIds: listContentIds.join(',') })
     if (response?.data.meta?.code === 0) {
       dispatch(setAddToCart([]))

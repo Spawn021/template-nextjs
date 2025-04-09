@@ -1,6 +1,6 @@
-import { getTimeRunning } from '@/lib/utils'
 import React from 'react'
 import { Typography } from 'antd'
+import moment from 'moment'
 const { Paragraph } = Typography
 function TrackList({ contentDetail }: { contentDetail: any }) {
   const { medias } = contentDetail ?? {}
@@ -30,7 +30,8 @@ function TrackList({ contentDetail }: { contentDetail: any }) {
                     </Paragraph>
 
                     <div className="text-[#6b7280]">
-                      {getTimeRunning(item?.file?.timeRunning)}
+                      {moment.utc(item?.timeRunning * 1000).format('HH:mm:ss') ||
+                        '00:00:00'}
                     </div>
                   </div>
                 </div>

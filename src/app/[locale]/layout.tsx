@@ -6,6 +6,8 @@ import { Locale } from '@/i18n/request'
 import ClientProvider from '@/components/Providers/ClientProvider'
 import LanguageSwitcher from '@/components/Language/LanguageSwitcher'
 import BackTop from '@/components/Button/BackTop'
+import Player from '@/components/ListTrack/Player'
+import ModalCustom from '@/components/ModalCustom'
 export default async function LocaleLayout({
   children,
   params,
@@ -30,6 +32,8 @@ export default async function LocaleLayout({
             <LanguageSwitcher />
           </div>
           {children}
+          <Player />
+          <ModalCustom />
         </div>
         <BackTop />
       </ClientProvider>

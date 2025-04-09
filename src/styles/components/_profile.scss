@@ -16,3 +16,132 @@
     }
   }
 }
+.profile-page {
+  aside {
+    border-radius: 10px !important;
+  }
+  .ant-layout-sider-children {
+    padding: 12px !important;
+    border: 1px solid #e1e3e7;
+    border-radius: 10px;
+  }
+  .ant-menu-light.ant-menu-root.ant-menu-inline {
+    border-inline-end: none !important;
+  }
+  .ant-menu-item {
+    padding-left: 12px !important;
+    font-size: 16px !important;
+  }
+  .toggle-active {
+    svg {
+      path {
+        fill: white !important;
+        stroke: white !important;
+      }
+    }
+  }
+}
+.transaction-history {
+  .status {
+    &-successful {
+      color: #61bb2d;
+      background-color: #dcffd3;
+      border: 1px solid #a1e58a;
+    }
+    &-pending {
+      color: #f19d0b;
+      background-color: #ffe6d7;
+      border: 1px solid #efba63;
+    }
+    &-failure {
+      color: #d92d20;
+      background-color: #ffd0c4;
+      border: 1px solid #f99d96;
+    }
+  }
+}
+.item-purchase:last-child {
+  border-bottom: 0px !important;
+}
+.input-profile {
+  .ant-input {
+    border-radius: 8px !important;
+    padding: 4px 11px !important;
+    border: 1px solid #d1d5db !important;
+    height: 40px !important;
+  }
+}
+.change-password-form {
+  .ant-input-affix-wrapper-lg {
+    font-size: 14px !important;
+  }
+  .ant-form-item-explain-error {
+    margin: 6px 0 14px !important;
+  }
+  .ant-btn-variant-solid:disabled {
+    background-color: #00aaf2 !important;
+    color: #fff !important;
+    border: 1px solid #00aaf2 !important;
+  }
+}
+.modal-custom {
+  .ant-modal-content {
+    border-radius: 10px !important;
+    padding: 24px 20px !important;
+    .ant-modal-close-x {
+      top: 20px !important;
+      right: 20px !important;
+    }
+    .ant-modal-header {
+      border-bottom: none !important;
+      padding: 0 !important;
+    }
+    .ant-modal-body {
+      padding: 0 !important;
+    }
+  }
+}
+.otp-input {
+  .ant-otp {
+    column-gap: 12px !important;
+
+    .ant-input {
+      width: 71px !important;
+      height: 56px !important;
+      border: none !important;
+      border-bottom: 1px solid #d1d5db !important;
+    }
+    input[type='text'].ant-input {
+      font-size: 30px !important;
+      font-weight: 600 !important;
+    }
+    input[type='text']:focus.ant-input {
+      border: none !important;
+      border-bottom: 1px solid #030712 !important;
+      color: #030712 !important;
+      box-shadow: none !important;
+      outline: none !important;
+    }
+    .ant-input-outlined:focus-within {
+      box-shadow: none !important;
+    }
+  }
+
+  ul {
+    list-style-type: disc !important;
+    font-size: 14px;
+    margin-top: 16px;
+    color: #6b7280;
+    li {
+      margin-left: 10%;
+    }
+  }
+}
+#change-email_email_help {
+  .ant-form-item-explain-error {
+    margin: 6px 0 14px !important;
+  }
+}
+#change-email input {
+  border-radius: 8px !important;
+}

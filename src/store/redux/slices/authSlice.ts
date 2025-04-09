@@ -8,7 +8,9 @@ interface AuthState {
     accessToken: string
     refreshToken: string
     isVerified: boolean
+    provider?: string
   }
+  emailSending: string
 }
 
 const initialState: AuthState = {
@@ -19,7 +21,9 @@ const initialState: AuthState = {
     accessToken: '',
     refreshToken: '',
     isVerified: false,
+    provider: '',
   },
+  emailSending: '',
 }
 
 const authSlice = createSlice({
@@ -32,8 +36,33 @@ const authSlice = createSlice({
     logout: (state) => {
       state.user = initialState.user
     },
+    setEmailSending: (state: AuthState, action) => {
+      return {
+        ...state,
+        emailSending: action.payload,
+      }
+    },
+    setAccessToken: (state: AuthState, action) => {
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          accessToken: action.payload,
+        },
+      }
+    },
+    setEmail: (state: AuthState, action) => {
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          email: action.payload,
+        },
+      }
+    },
   },
 })
 
-export const { loginSuccess, logout } = authSlice.actions
+export const { loginSuccess, logout, setEmailSending, setAccessToken, setEmail } =
+  authSlice.actions
 export default authSlice.reducer

@@ -1,5 +1,5 @@
 export interface AuthSNS {
-  accessToken: string
+  accessToken?: string
   tokenSecret?: string
   type: number
 }

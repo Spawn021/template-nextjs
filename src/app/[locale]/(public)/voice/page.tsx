@@ -33,9 +33,8 @@ export default function Voice() {
   }, [searchParams])
 
   const [showFilter, setShowFilter] = useState(false)
-
   const { data, isLoading } = useVoice(user.id, { ...params, limit: 15 })
-
+  console.log('data', data)
   useEffect(() => {
     const values = ['files', 'categoryIds', 'series', 'fromPrice', 'toPrice']
     const fromVoice = values.some((value) => {

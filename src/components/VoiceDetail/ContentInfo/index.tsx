@@ -4,6 +4,7 @@ import { RootState } from '@/store/redux/store'
 import { useDispatch, useSelector } from 'react-redux'
 import moment from 'moment'
 import { Button, Typography } from 'antd'
+import { useQueryClient } from '@tanstack/react-query'
 
 import TagCategory from '@/components/Product/Item/TagCategory'
 import TagProduct from '@/components/Product/Item/TagProduct'
@@ -17,9 +18,16 @@ import WaitIcon from '@/resources/svg/icon-wait.svg'
 import Image from 'next/image'
 
 const { Paragraph } = Typography
-function ContentInfo({ contentDetail }: { contentDetail: any }) {
+function ContentInfo({
+  contentDetail,
+  render = true,
+}: {
+  contentDetail: any
+  render?: boolean
+}) {
   const router = useRouter()
   const dispatch = useDispatch()
+  const queryClient = useQueryClient()
   const {
     title,
     category,
@@ -105,12 +113,14 @@ function ContentInfo({ contentDetail }: { contentDetail: any }) {
       dispatch(setContentRelevant({ series: seriesNew, withoutContentIds: idNew }))
     }
     dispatch(setListCheckout([...listCheckout, id]))
+    queryClient.invalidateQueries({ queryKey: ['voice'] })
     addToCart(contentDetail, isShowMessage)
   }
   const handleBuyNow = () => {
     if (!isAddedToCart) handleAddToCart(false)
 
     dispatch(setListCheckout([id]))
+    queryClient.invalidateQueries({ queryKey: ['voice'] })
     if (user.accessToken) {
       router.push(APP_URL.CHECKOUT)
     } else {
@@ -213,7 +223,7 @@ function ContentInfo({ contentDetail }: { contentDetail: any }) {
   }
   return (
     <>
-      {renderButton()}
+      {render && renderButton()}
       <div className="border-[1px] border-solid border-[#e1e3e7] mb-5 rounded-[12px]">
         <div className="text-[18px] font-semibold px-4 py-2 border-b-[1px]">詳細</div>
         <div className="px-4 py-3">

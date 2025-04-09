@@ -17,6 +17,8 @@
 @use 'components/_modal';
 @use 'components/_payment';
 @use 'components/_detail';
+@use 'components/_my-library';
+@use 'components/_modal-download';
 
 body {
   &::-webkit-scrollbar-track {

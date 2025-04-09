@@ -23,7 +23,6 @@ function VoiceDetail() {
   const { id } = useParams()
   const pathname = usePathname()
   const { contentDetail } = useContentDetail(id)
-  const { user } = useSelector((state: RootState) => state.auth)
 
   const urlShare = `${process.env.NEXT_PUBLIC_APP_URL_SHARE}${pathname}`
   const content = (
