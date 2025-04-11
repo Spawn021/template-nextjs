@@ -34,7 +34,7 @@ export default function Voice() {
 
   const [showFilter, setShowFilter] = useState(false)
   const { data, isLoading } = useVoice(user.id, { ...params, limit: 15 })
-  console.log('data', data)
+
   useEffect(() => {
     const values = ['files', 'categoryIds', 'series', 'fromPrice', 'toPrice']
     const fromVoice = values.some((value) => {
@@ -87,8 +87,22 @@ export default function Voice() {
       query: { ...filterPrice },
     })
   }
+  const { keyword } = params
   const onClear = () => {
-    const filter = { sortField: params.sortField, sortType: params.sortType, page: 1 }
+    const filter: {
+      sortField?: string
+      sortType?: string
+      page: number
+      keyword?: string
+    } = {
+      keyword: keyword,
+      sortField: params.sortField,
+      sortType: params.sortType,
+      page: 1,
+    }
+    if (!keyword) {
+      delete filter.keyword
+    }
     router.push({
       pathname: APP_URL.VOICE,
       query: { ...filter },
@@ -162,7 +176,11 @@ export default function Voice() {
               <Button type="text" icon={<ArrowLeft />} className="filter-button" />
             )}
           </div>
-          <Sort onSortChange={handleSortChange} total={data?.meta?.totalItems} />
+          <Sort
+            onSortChange={handleSortChange}
+            total={data?.meta?.totalItems}
+            keyword={keyword}
+          />
         </div>
         <div className="pagination-custom">
           {!isLoading

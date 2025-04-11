@@ -1,10 +1,10 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import Image from 'next/image'
 import { useParams } from 'next/navigation'
 import useContentDetail from '@/hooks/useContentDetail'
 import { RootState } from '@/store/redux/store'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import BreadCrumb from '@/components/Breadcrumb'
 import IconShare from '@/resources/svg/icon-share.svg'
 import FacebookIcon from '@/resources/svg/facebook.svg'
@@ -18,12 +18,50 @@ import ContentImage from '@/components/VoiceDetail/ContentImage'
 import ContentInfo from '@/components/VoiceDetail/ContentInfo'
 import TrackList from '@/components/VoiceDetail/TrackList'
 import ShowMore from '@/components/VoiceDetail/ShowMore'
+import useCartList from '@/hooks/useCartList'
+import { STATUS_CONTENT } from '@/constants'
+import { setContentRelevant } from '@/store/redux/slices/contentSlice'
+import ContentRecommend from '@/components/VoiceDetail/ContentRecommend'
 
 function VoiceDetail() {
   const { id } = useParams()
   const pathname = usePathname()
+  const dispatch = useDispatch()
   const { contentDetail } = useContentDetail(id)
+  const { user } = useSelector((state: RootState) => state.auth)
+  const { cart } = useSelector((state: RootState) => state.content)
+  const { data } = useCartList(user?.accessToken)
 
+  const listCart = user?.accessToken ? data : cart
+
+  const { ids, series: arrSeries }: { ids: string[]; series: string[] } = useMemo(() => {
+    if (listCart && listCart.length) {
+      const sales = listCart.filter(
+        (f: any) => f?.content?.status === STATUS_CONTENT.ON_SALE,
+      )
+      if (sales && sales.length) {
+        const ids = sales.map((f: any) => f?.content?.id)
+        const series = sales.map((f: any) => f?.content?.series)
+        return { ids, series }
+      }
+      return { ids: [], series: [] }
+    }
+  }, [listCart]) ?? { ids: [], series: [] }
+
+  useEffect(() => {
+    if (listCart && !listCart.length) {
+      dispatch(setContentRelevant({ series: [], withoutContentIds: [] }))
+    } else {
+      if (ids && arrSeries) {
+        dispatch(
+          setContentRelevant({
+            series: [...new Set(arrSeries)],
+            withoutContentIds: [...new Set(ids)],
+          }),
+        )
+      }
+    }
+  }, [listCart, ids?.length, arrSeries?.length])
   const urlShare = `${process.env.NEXT_PUBLIC_APP_URL_SHARE}${pathname}`
   const content = (
     <div className="min-w-[200px]">
@@ -98,6 +136,10 @@ function VoiceDetail() {
             <TrackList contentDetail={contentDetail} />
           </div>
         </div>
+        <ContentRecommend
+          id={String(id)}
+          series={contentDetail?.series?.name ? contentDetail?.series?.name : ''}
+        />
       </div>
     </div>
   )

@@ -20,7 +20,6 @@ function ModalCustom() {
     TYPE_MODAL.RESET_PASSWORD,
     TYPE_MODAL.VERIFY_EMAIL_NEW,
     TYPE_MODAL.CHANGE_EMAIL,
-    TYPE_MODAL.LOGIN_HISTORY,
     TYPE_MODAL.ADD_EMAIL,
   ]
   const {
@@ -37,11 +36,12 @@ function ModalCustom() {
       <Modal
         open={open}
         title={
-          <div className="text-xl mb-6">
-            <h3>{title ? title : 'common'}</h3>
-            {subtitle && <p>{subtitle}</p>}
+          <div>
+            <h3 className="text-xl mb-6">{title ? title : 'common'}</h3>
+            {subtitle && <p className="text-base font-normal">{subtitle}</p>}
           </div>
         }
+        width={typeModal !== TYPE_MODAL.LOGIN_HISTORY ? 540 : 800}
         onCancel={onClose}
         maskClosable={modalCantClose.indexOf(typeModal) !== -1 ? false : true}
         closeIcon={modalHasCloseX.indexOf(typeModal) === -1 ? true : false}

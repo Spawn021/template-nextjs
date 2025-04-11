@@ -28,8 +28,9 @@ const items: MenuProps['items'] = [
 type Props = {
   onSortChange: (sort: string) => void
   total: number
+  keyword?: string
 }
-export default function Sort({ onSortChange, total }: Props) {
+export default function Sort({ onSortChange, total, keyword }: Props) {
   const [selected, setSelected] = useState('Newest')
   const handleSelect: MenuProps['onClick'] = (e) => {
     const selectedItem = items?.find((item) => item?.key === e.key) as
@@ -46,7 +47,15 @@ export default function Sort({ onSortChange, total }: Props) {
   }
   return (
     <div className="border-l-[1px] px-4 h-11 flex items-center justify-between gap-4">
-      <div className="text-sm font-semibold">{`${total ? total : 0} results`}</div>
+      <div className="text-sm font-semibold">
+        {`${total ? total : 0} results`}
+        {keyword && (
+          <>
+            <span> for:</span>
+            <span className="text-[#00aaf2]"> {keyword} </span>
+          </>
+        )}
+      </div>
       <div className="flex items-center gap-4 text-sm sort-custom">
         <div className="text-sm">Sort by:</div>
         <Dropdown menu={menuProps} trigger={['click']} className="text-xs cursor-pointer">

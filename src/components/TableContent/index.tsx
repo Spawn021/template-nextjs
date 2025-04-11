@@ -8,13 +8,13 @@ type Props = {
   columns: { title: string; dataIndex: string; key: string }[]
   currentPage?: number
   totalItems?: number
-  totalPages: number
+  totalPages?: number
   itemsPerPage?: number
-  showSizeChanger: boolean
+  showSizeChanger?: boolean
   pageSizeOptions?: number[]
   loading?: boolean
-  onChangePage: (pageNum: number, pageSize: number) => void
-  onShowSizeChange: (current: number, pageSize: number) => void
+  onChangePage?: (pageNum: number, pageSize: number) => void
+  onShowSizeChange?: (current: number, pageSize: number) => void
 }
 const itemRender: PaginationProps['itemRender'] = (_, type, originalElement) => {
   if (type === 'prev') {
@@ -54,9 +54,9 @@ function TableContent({
         dataSource={data?.map((item, index) => ({ ...item, key: index }))}
         columns={columns}
         pagination={false}
-        className="table-purchased"
+        className="table-purchased w-full"
       />
-      {!loading && totalPages > 2 && (
+      {!loading && totalPages && totalPages > 2 && (
         <div className="pagination-custom pagination-library flex justify-end mt-2 pt-[19px] pb-[23px]">
           <Pagination
             locale={{ items_per_page: `/ page` }}

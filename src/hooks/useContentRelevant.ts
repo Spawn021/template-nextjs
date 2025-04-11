@@ -18,13 +18,18 @@ export default function useContentRelevant(
       type: 'recomendation',
     })
     if (response?.data.meta?.code === 0) {
-      return response.data?.items
+      return response.data?.data.items
     } else {
       throw new Error('Failed to fetch content relevant')
     }
   }
-  return useQuery({
-    queryKey: ['contentRelevant', name, finalId, finalSeries, userId],
+  const useFetchContentRelevant = useQuery({
+    queryKey: ['contentRelevant', finalId, finalSeries, userId],
     queryFn: fetchContentRelevant,
+    select: (data) => {
+      return data
+    },
   })
+
+  return { useFetchContentRelevant }
 }

@@ -31,3 +31,40 @@
     }
   }
 }
+.recommend-slide {
+  .item-wrapper {
+    display: flex !important;
+    justify-content: center;
+  }
+  .slick-prev,
+  .slick-next {
+    z-index: 1;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 55px;
+    height: 55px;
+    border: 1px solid #e4e7ec80;
+    background-color: #ffffffb2;
+    border-radius: 50%;
+  }
+
+  .slick-prev {
+    left: -15px !important;
+    &:before {
+      display: none;
+    }
+    &:hover {
+      background-color: #ffffffb2;
+    }
+  }
+  .slick-next {
+    right: -20px !important;
+    &:before {
+      display: none;
+    }
+    &:hover {
+      background-color: #ffffffb2;
+    }
+  }
+}

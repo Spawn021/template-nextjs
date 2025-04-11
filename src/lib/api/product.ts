@@ -7,7 +7,6 @@ export const getProducts = async (id: string, params: filterVoice) => {
       ...(id ? { userId: id } : {}),
     },
   })
-  console.log('response', response.data)
   return response.data.data
 }
 export const getCategories = async () => {
@@ -22,7 +21,7 @@ export const apiGetContentDetail = (id: string, userId: string) => {
   return api.get(`contents/${id}${userId && `?userId=${userId}`}`)
 }
 export const getContentRelevant = (params: any) => {
-  return api.get(`contents`, params)
+  return api.get(`contents`, { params })
 }
 export const apiAddToCart = (params: any) => {
   return api.post(`carts`, params)
@@ -42,4 +41,7 @@ export const onDownload = (id: string, params: any) => {
 
 export const onDownloadMulti = (id: string, data: any) => {
   return api.post(`contents/${id}/downloads`, data)
+}
+export const apiGetRecommendation = (keyword: string, id: string) => {
+  return api.get(`contents/recommendation?keyword=${keyword}${id ? `&userId=${id}` : ''}`)
 }

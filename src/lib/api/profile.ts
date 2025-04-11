@@ -31,3 +31,6 @@ export const handleSendCodeToNewEmail = (id: string, params: any) => {
 export const handleVerifyNewEmail = (id: string, params: any) => {
   return api.post(`users/${id}/code/verify-new-email`, params)
 }
+export const apiGetLoginHistory = (offset: number) => {
+  return api.get(`history-logins/user-profile?page=${offset}&limit=10`)
+}

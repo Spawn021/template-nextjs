@@ -20,3 +20,66 @@
     }
   }
 }
+.search-modal {
+  .ant-modal-content {
+    padding: 0px;
+    border-radius: 30px;
+    border: 3px solid #00a5ea;
+    input[type='search'] {
+      padding: 4px 11px !important;
+      border: none !important;
+      border-radius: 30px !important;
+      &:focus {
+        box-shadow: none !important;
+      }
+    }
+    .ant-modal-body .ant-select {
+      width: 100% !important;
+    }
+  }
+  .ant-input-outlined:focus-within {
+    box-shadow: none !important;
+  }
+  .ant-input-group-addon {
+    button {
+      display: none;
+    }
+  }
+}
+.search-autocomplete-popup {
+  padding: 0px 0px 12px 0px !important;
+  .rc-virtual-list {
+    &-scrollbar {
+      width: 4px !important;
+      background-color: #f3f4f6 !important;
+      visibility: unset !important;
+      &-thumb {
+        bottom: rgba(0, 0, 0, 0.3) !important;
+      }
+    }
+  }
+  .ant-select-item.ant-select-item-group {
+    padding: 4px 12px;
+    background-color: #f3f4f6;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  .ant-select-item-option-grouped {
+    padding-inline-start: 0px !important;
+    padding: 0px !important;
+  }
+  .ant-select-item-option-active:not(.ant-select-item-option-disabled) {
+    background-color: white !important;
+  }
+  .search-recommendation-item-content span span {
+    font-size: 12px !important;
+  }
+  .ant-select-item-empty {
+    padding: 0px !important;
+    .ant-empty-image {
+      padding: 5px 12px !important;
+    }
+  }
+}
+.custom-hide-dropdown {
+  display: none !important;
+}

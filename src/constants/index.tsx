@@ -4,6 +4,7 @@ import VerifyEmailModal from '@/components/ModalCustom/VerifyEmailModal'
 
 import { FilterTransaction } from '@/types/Profile'
 import CardPayment from '@/components/Checkout/CardPayment'
+import LoginHistoryModal from '@/components/ModalCustom/LoginHistoryModal'
 
 export const APP_PROVIDER = {
   FACEBOOK: 'facebook',
@@ -228,9 +229,9 @@ export const TYPE_MODAL_CONTENT = {
     content: <ChangePasswordProfileModal />,
   },
   [TYPE_MODAL.LOGIN_HISTORY]: {
-    title: 'profile.login_history',
-    subtitle: 'profile.login_history_description',
-    content: '',
+    title: 'Login history',
+    subtitle: 'You can view your login history in the latest 30 days.',
+    content: <LoginHistoryModal />,
   },
 
   [TYPE_MODAL.CHANGE_EMAIL]: {

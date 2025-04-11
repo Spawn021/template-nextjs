@@ -59,6 +59,10 @@ function UserProfile() {
   const handleDelete = () => {
     setIsModalVisible(true)
   }
+  const handleViewHistory = () => {
+    dispatch(setTypeModal(TYPE_MODAL.LOGIN_HISTORY))
+    onVisible()
+  }
   return (
     <>
       <h2 className="font-semibold text-xl mb-2">My Profile</h2>
@@ -145,7 +149,12 @@ function UserProfile() {
         description="View your login history to EC Platform"
         provider={provider}
       >
-        data
+        <span
+          className="text-base font-semibold text-[#00aaf2] cursor-pointer"
+          onClick={handleViewHistory}
+        >
+          View
+        </span>
       </RenderContent>
       <ModalDeleteCard
         isModalVisible={isModalVisible}

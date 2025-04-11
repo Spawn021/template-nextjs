@@ -1,13 +1,12 @@
 'use client'
 import clsx from 'clsx'
 import Image from 'next/image'
-import { use, useEffect, useState } from 'react'
+import { use, useEffect } from 'react'
 import { Link } from '@/i18n/routing'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/store/redux/store'
 import { useSearchParams } from 'next/navigation'
 import { usePathname } from '@/i18n/routing'
-import { useQueryClient } from '@tanstack/react-query'
 
 import Notifications from '@/components/Notifications'
 import Profile from '@/components/Profile'
@@ -17,7 +16,7 @@ import DrawerCart from '@/components/DrawerCart'
 
 import Logo from '@/resources/svg/logo.svg'
 import FavouriteListIcon from '@/resources/svg/FavouriteListIcon'
-import HomeSearch from '@/components/Search/HomeSearch'
+import HomeSearch from '@/components/Search'
 import SoundWaveIcon from '@/resources/svg/SoundWaveIcon'
 import CartIcon from '@/resources/svg/CartIcon'
 import HelpIcon from '@/resources/svg/HelpIcon'
@@ -34,6 +33,7 @@ export default function Header() {
 
   const listCart = user?.accessToken ? data : cart
   const numberCart = listCart ? listCart.length : 0
+
   const { onOpen, onClose, openDrawerCart } = useDrawerCart()
 
   useEffect(() => {
