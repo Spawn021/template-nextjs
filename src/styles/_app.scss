@@ -19,6 +19,7 @@
 @use 'components/_detail';
 @use 'components/_my-library';
 @use 'components/_modal-download';
+@use 'components/_notification';
 
 body {
   &::-webkit-scrollbar-track {

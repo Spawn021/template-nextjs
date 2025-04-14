@@ -43,7 +43,7 @@ function TransactionHistory() {
     page,
   }
   const { transactions, loading } = useTransactionHistory(newFilter)
-  console.log('transactions', transactions)
+
   const { totalItems, itemsPerPage, currentPage, totalPages } = transactions?.meta || {}
   const itemRender: PaginationProps['itemRender'] = (_, type, originalElement) => {
     if (type === 'prev') {

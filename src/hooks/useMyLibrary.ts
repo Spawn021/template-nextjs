@@ -81,6 +81,7 @@ export default function useMyLibrabry(id: string, params: FilterTransaction) {
   const { data: transactionPurchased } = useQuery({
     queryKey: ['transactionPurchased', params],
     queryFn: () => fetchTransactionPurchased(),
+    placeholderData: (previousData) => previousData,
   })
 
   return {

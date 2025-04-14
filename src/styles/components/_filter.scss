@@ -21,3 +21,8 @@
   font-size: 10px;
   font-weight: 500;
 }
+.sort-custom {
+  .ant-dropdown {
+    z-index: 0;
+  }
+}

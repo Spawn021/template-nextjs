@@ -199,3 +199,8 @@
     font-weight: 500 !important;
   }
 }
+.spin-custom {
+  .ant-spin-nested-loading > div > .ant-spin {
+    max-height: 500px !important;
+  }
+}

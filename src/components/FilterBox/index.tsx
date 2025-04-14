@@ -4,7 +4,7 @@ import { getCategories, getTags } from '@/lib/api/product'
 import FilterCustom from '@/components/FilterBox/FilterCustom'
 import { Category, Tag } from '@/types/Home'
 import { convertStringToArray, ParseOptionCategoryAndTag } from '@/lib/utils'
-import { Divider } from 'antd'
+import { Divider, Spin } from 'antd'
 import { FILE_FORMAT, filterVoice } from '@/lib/constant'
 import FilterPrice, { FilterPriceForm } from '@/components/FilterBox/FilterPrice'
 import TagsFilter from '@/components/FilterBox/TagsFilter'
@@ -29,11 +29,11 @@ function FilterBox({
   clearAll,
 }: props) {
   const [search, setSearch] = useState('')
-  const { data: categories } = useQuery({
+  const { data: categories, isLoading: isLoadingCate } = useQuery({
     queryKey: ['categories'],
     queryFn: getCategories,
   })
-  const { data: tags } = useQuery({
+  const { data: tags, isLoading: isLoadingTag } = useQuery({
     queryKey: ['tags'],
     queryFn: getTags,
   })
@@ -104,45 +104,49 @@ function FilterBox({
   }
 
   return (
-    <div className=" border-r-[1px] border-solid w-[260px] border-[#dcdcdc]">
-      <div className="py-5 pr-3 w-[260px]">
-        <TagsFilter
-          selectedOptions={selectedOptions}
-          closeItem={onClose}
-          closeAll={clearAll}
-        />
-        {selectedOptions.length > 0 && <Divider />}
-        <FilterCustom
-          title="Category"
-          options={categoriesData}
-          field="categoryIds"
-          onChange={onFilterChange}
-          selectedIds={convertStringToArray(params.categoryIds || '')}
-        />
-        <Divider />
-        <FilterCustom
-          hasSearch
-          title="Tags"
-          options={tagsData}
-          field="tagIds"
-          selectedIds={convertStringToArray(params.tagIds || '')}
-          onChange={onFilterChange}
-          onSearch={handleSearch}
-        />
-        <Divider />
-        <FilterCustom
-          title="File Format"
-          options={FILE_FORMAT}
-          field="files"
-          onChange={onFilterChange}
-          selectedIds={convertStringToArray(params.files || '')}
-        />
-        <Divider />
-        <FilterPrice
-          onApply={onApplyPrice}
-          fromPrice={params.fromPrice?.toString()}
-          toPrice={params.toPrice?.toString()}
-        />
+    <div>
+      <div className=" border-r-[1px] border-solid w-[260px] border-[#dcdcdc] spin-custom">
+        <Spin spinning={isLoadingCate || isLoadingTag} className="w-full h-full bg-white">
+          <div className="py-5 pr-3 w-[260px]">
+            <TagsFilter
+              selectedOptions={selectedOptions}
+              closeItem={onClose}
+              closeAll={clearAll}
+            />
+            {selectedOptions.length > 0 && <Divider />}
+            <FilterCustom
+              title="Category"
+              options={categoriesData}
+              field="categoryIds"
+              onChange={onFilterChange}
+              selectedIds={convertStringToArray(params.categoryIds || '')}
+            />
+            <Divider />
+            <FilterCustom
+              hasSearch
+              title="Tags"
+              options={tagsData}
+              field="tagIds"
+              selectedIds={convertStringToArray(params.tagIds || '')}
+              onChange={onFilterChange}
+              onSearch={handleSearch}
+            />
+            <Divider />
+            <FilterCustom
+              title="File Format"
+              options={FILE_FORMAT}
+              field="files"
+              onChange={onFilterChange}
+              selectedIds={convertStringToArray(params.files || '')}
+            />
+            <Divider />
+            <FilterPrice
+              onApply={onApplyPrice}
+              fromPrice={params.fromPrice?.toString()}
+              toPrice={params.toPrice?.toString()}
+            />
+          </div>
+        </Spin>
       </div>
     </div>
   )

@@ -64,6 +64,7 @@ export default function Voice() {
   const handleFilter = () => {
     setShowFilter(!showFilter)
   }
+
   const handleFilterChange = (field: keyof filterVoice, value: number[]) => {
     const filter = { ...params, page: 1, [field]: convertArrayToString(value) }
     if (!filter[field]) {

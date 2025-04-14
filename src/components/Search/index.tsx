@@ -99,7 +99,6 @@ function HomeSearch() {
       dropdown.style.display = open ? 'block' : 'none'
     }
   }, [open])
-  console.log(open)
   return (
     <>
       <Input

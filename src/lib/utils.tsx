@@ -3,12 +3,14 @@ import {
   LIST_FILE_FORMAT,
   SORT_TYPE,
   SORT_TYPE_FILTER,
+  TIME_FORMAT_AM_PM,
   TYPE_MODAL_CONTENT,
 } from '@/constants'
 import { Category, ProductItem, Tag } from '@/types/Home'
 import BigNumber from 'bignumber.js'
 import { Col, Row, Tooltip, Typography } from 'antd'
 import { filterVoice } from '@/lib/constant'
+import moment from 'moment'
 const getKeyValue = (key: string) => (obj: Record<string, any>) => obj[key]
 export const getTypeProvider = (provider: string) => {
   return getKeyValue(provider)(APP_TYPE)
@@ -204,4 +206,28 @@ export const getContentModal = ({ typeModal }: { typeModal: number }) => {
     }
   }
   return { title: '', subtitle: '', content: null }
+}
+export const addTargetBlankToLinks = (html: string) => {
+  const parser = new DOMParser()
+  const doc = parser.parseFromString(html, 'text/html')
+  const links = doc.getElementsByTagName('a')
+
+  for (let i = 0; i < links.length; i++) {
+    links[i].setAttribute('target', '_blank')
+    links[i].setAttribute('rel', 'noopener noreferrer')
+  }
+
+  return doc.body.innerHTML
+}
+export const unescapeString = (str: string) => {
+  return str.replace(/\\"/g, '"').replace(/\\n/g, '\n').replace(/\\t/g, '\t')
+}
+export const getTimeAmPm = (time: any) => {
+  const convertTime = moment(time).format(TIME_FORMAT_AM_PM)
+  return convertTime
+}
+export const getNotificationTitle = (notification: any) => {
+  return notification.type === 'news-notification'
+    ? notification.title
+    : notification.metadata.title
 }

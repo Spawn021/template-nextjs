@@ -1,0 +1,14 @@
+.notification__desc {
+  word-break: break-word;
+}
+.notification__item-more {
+  .notification-dropdown {
+    position: absolute !important;
+    width: 150px;
+  }
+}
+.notification-custom {
+  .ant-btn.ant-btn-icon-only {
+    width: 36px;
+  }
+}

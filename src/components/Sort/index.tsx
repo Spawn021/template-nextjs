@@ -58,7 +58,15 @@ export default function Sort({ onSortChange, total, keyword }: Props) {
       </div>
       <div className="flex items-center gap-4 text-sm sort-custom">
         <div className="text-sm">Sort by:</div>
-        <Dropdown menu={menuProps} trigger={['click']} className="text-xs cursor-pointer">
+        <Dropdown
+          menu={menuProps}
+          trigger={['click']}
+          className="text-xs cursor-pointer"
+          getPopupContainer={(triggerNode) => triggerNode.parentNode as HTMLElement}
+          overlayStyle={{
+            position: 'fixed',
+          }}
+        >
           <a onClick={(e) => e.preventDefault()}>
             <Space>
               {selected}

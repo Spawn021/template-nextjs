@@ -21,6 +21,7 @@ export default function useTransactionHistory(params: FilterTransaction) {
     queryKey: ['transaction-history', params],
     queryFn: fetchTransaction,
     refetchOnWindowFocus: false,
+    placeholderData: (previousData) => previousData,
     enabled: !!params,
   })
 

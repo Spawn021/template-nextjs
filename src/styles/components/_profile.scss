@@ -146,7 +146,10 @@
   border-radius: 8px !important;
 }
 .infinite-scroll {
-  &::-webkit-scrollbar {
+  height: auto !important;
+  min-height: 500px !important;
+  padding-bottom: 20px !important;
+  p &::-webkit-scrollbar {
     width: 4px;
   }
 

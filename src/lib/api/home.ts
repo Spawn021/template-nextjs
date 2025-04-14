@@ -14,3 +14,19 @@ export const getProductNewRelease = async (id: string, limit: number) => {
   )
   return response.data.data
 }
+export const apiGetListNotifications = (params: any) => {
+  return api.get(`notification`, params)
+}
+export const apiReadNotification = (id: number) => {
+  return api.patch(`notification/${id}`)
+}
+export const apiReadAll = () => {
+  return api.patch(`notification/read-all`)
+}
+
+export const apiDeleteNotification = (id: number) => {
+  return api.delete(`notification/${id}`)
+}
+export const apiGetNotificationDetail = (id: number) => {
+  return api.get(`notification/detail/${id}`)
+}

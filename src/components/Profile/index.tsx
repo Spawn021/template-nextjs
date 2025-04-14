@@ -67,6 +67,9 @@ const Profile: React.FC<ProfileProps> = ({ email }) => {
       menu={{ items, onClick }}
       trigger={['click']}
       overlayClassName="profile-dropdown"
+      overlayStyle={{
+        position: 'fixed',
+      }}
     >
       <a onClick={(e) => e.preventDefault()}>
         <Space>

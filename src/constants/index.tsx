@@ -265,3 +265,4 @@ export const TYPE_MODAL_CONTENT = {
   },
 }
 export const regexStrongPassword = '^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).{8,}$'
+export const TIME_FORMAT_AM_PM = 'YYYY/MM/DD HH:mm:ss A'
